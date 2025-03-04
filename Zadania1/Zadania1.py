@@ -1,8 +1,10 @@
 import cv2
 import os
+import keyboard
+import screeninfo
 
-image_path = "ZaawansowanyPython/imagePython.jpg" #Samo "picturepython.jpg" nie chciało działać na moim komputerze.
-image_path2 = "ZaawansowanyPython/imageBlack.jpg"
+image_path = "ZaawansowanyPython/Zadania1/imagePython.jpg" #Samo "picturepython.jpg" nie chciało działać na moim komputerze.
+image_path2 = "ZaawansowanyPython/Zadania1/imageBlack.jpg"
 
 #Zadanie1
 def Zad1():
@@ -64,14 +66,32 @@ def Zad5():
     image2 = cv2.imread(image_path2)
     if image2 is None:
         print("Błąd wczytywania obrazu 2")
-    else:
-        print("Obraz 2 wczytano poprawnie.")
+        return
+    
+    print("Obraz 2 wczytano poprawnie.")
         
-        cv2.imshow("Wyświetlony obraz", image1)        
-        cv2.imshow("Wyświetlony obraz2", image2)
-        
-        cv2.waitKey(0)
-        cv2.destroyAllWindows()
+    cv2.imshow("obraz1", image1)        
+    cv2.imshow("obraz2", image2)
+
+    cv2.waitKey(0)
+               
+    while True:
+        if keyboard.is_pressed('1'):
+            cv2.destroyWindow("obraz1")
+            print("Zamknięto obraz1")
+
+        if keyboard.is_pressed('2'):
+            cv2.destroyWindow("obraz2")
+            print("Zamknięto obraz2")
+
+        if cv2.getWindowProperty("obraz1", cv2.WND_PROP_VISIBLE) < 1 and \
+           cv2.getWindowProperty("obraz2", cv2.WND_PROP_VISIBLE) < 1:
+            break
+
+        cv2.waitKey(100)
+
+    cv2.destroyAllWindows()
+
 
 def Zad6():
     image = cv2.imread(image_path)
@@ -79,10 +99,16 @@ def Zad6():
     if image is None:
         print("Błąd wczytywania obrazu")
         return
-    
-    image_resized = cv2.resize(image, (1920, 1080))
 
-    cv2.imshow("Obraz 1920x1080", image_resized)
+    screen = screeninfo.get_monitors()[0]
+    screen_width, screen_height = screen.width, screen.height
+
+    image_resized = cv2.resize(image, (screen_width, screen_height))
+
+    cv2.namedWindow("Obraz na pełnym ekranie", cv2.WND_PROP_FULLSCREEN)
+    cv2.setWindowProperty("Obraz na pełnym ekranie", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
+
+    cv2.imshow("Obraz na pełnym ekranie", image_resized)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
