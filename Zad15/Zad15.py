@@ -11,17 +11,17 @@ def Zad1():
     cv2.imshow("1", image_rgb)
 
     b, g, r = cv2.split(image)
-    cv2.imshow("1", b)
-    cv2.imshow("2", g)
-    cv2.imshow("3", r)
+    cv2.imshow("2", b)
+    cv2.imshow("3", g)
+    cv2.imshow("4", r)
 
     hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
-    cv2.imshow("1", hsv)
+    cv2.imshow("5", hsv)
 
     h, s, v = cv2.split(hsv)
-    cv2.imshow("1", h)
-    cv2.imshow("2", s)
-    cv2.imshow("3", v)
+    cv2.imshow("6", h)
+    cv2.imshow("7", s)
+    cv2.imshow("8", v)
 
     cv2.waitKey(0)
     cv2.destroyAllWindows()
@@ -84,11 +84,11 @@ def Zad6():
     cv2.destroyAllWindows()
 
 def Zad7():
-    lower_s = cv2.subtract(s, 50)
+    lower_s = cv2.subtract(s, 100)
     hsv_lower = cv2.merge([h, lower_s, v])
     img_lower = cv2.cvtColor(hsv_lower, cv2.COLOR_HSV2BGR)
 
-    higher_s = cv2.add(s, 50)
+    higher_s = cv2.add(s, 100)
     hsv_higher = cv2.merge([h, higher_s, v])
     img_higher = cv2.cvtColor(hsv_higher, cv2.COLOR_HSV2BGR)
 
@@ -115,4 +115,4 @@ def Zad8():
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
-Zad8()
+Zad1()
